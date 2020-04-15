@@ -4,6 +4,7 @@ import argparse
 import pandas as pd
 import siclonefitio.formatting
 import visual.plot_imp_matrix as vp
+import shlex, subprocess
 
 def make_dir(dir):
     if not os.path.exists(dir):
@@ -37,8 +38,10 @@ def main():
                                              path_to_cnv=args.copyNumberClone,
                                              cnv_column_name="state")
     print(cmd)
-    # run siclonefit (java)
-    os.system(cmd)
+    cmd_list = shlex.split(cmd)
+    result = subprocess.run(cmd_list, stdout=subprocess.PIPE)
+    with open(f"{args.outpath}/{args.filename_prefix}_siclonefit_output_log.txt", "w") as f:
+        f.write(result.stdout.decode('utf-8'))
     # convert siclonefit output to pandas df
     snvmatrix, imputed_snvmatrix = siclonefitio.formatting.convert_siclonefit_result(args.snvmatrix,
                                                                                      args.outpath,
