@@ -30,6 +30,7 @@ def main():
     args = parser.parse_args()
     make_dir(args.outpath)
     # convert pandas df to txt for siclonefit
+    print("STEP 1: SIFIT FORMATTING")
     cmd = siclonefitio.formatting.sifit_formatting(args.snvmatrix,
                                              args.siclonefit_path,
                                              args.outpath,
@@ -42,7 +43,7 @@ def main():
     result = subprocess.run(cmd_list, stdout=subprocess.PIPE)
     with open(f"{args.outpath}/{args.filename_prefix}_siclonefit_output_log.txt", "w") as f:
         f.write(result.stdout.decode('utf-8'))
-    # convert siclonefit output to pandas df
+    print("STEP 2: Covert result back to pickle")
     snvmatrix, imputed_snvmatrix = siclonefitio.formatting.convert_siclonefit_result(args.snvmatrix,
                                                                                      args.outpath,
                                                                                      args.minPresence,
@@ -59,7 +60,8 @@ def main():
         snvmatrix = snvmatrix.loc[[f'{args.replicate}']]
         imputed_snvmatrix = imputed_snvmatrix.loc[[f'{args.replicate}']]
 
-    csplot = vp.CellSnvPlotMatrix(snvmatrix, imputed_snvmatrix,
+    csplot = vp.CellSnvPlotMatrix(snvmatrix,
+                                  imputed_snvmatrix,
                                   args.minPresence,
                                   args.minMeasurementsPerCell,
                                   args.outpath,

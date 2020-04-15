@@ -137,7 +137,6 @@ def sifit_formatting(path_to_ssnvs_matrix,
                      minMeasurementsPerCell=1,
                      path_to_cnv=None,
                      cnv_column_name = "state"):
-    print("STEP 1: SIFIT FORMATTING")
 
     filename = path_to_ssnvs_matrix.rsplit("/", 1)[1]
     path = out_path
@@ -165,6 +164,18 @@ def sifit_formatting(path_to_ssnvs_matrix,
 
 
 
+def missing_percentage(ssnvs_matrix):
+    """
+    Calculate missing percentage to detect correct folder name output from siclonefit
+    :return:
+    """
+    missing_percent = str(ssnvs_matrix.isnull().sum().sum() /
+                        (ssnvs_matrix.shape[0] * ssnvs_matrix.shape[1])).split(".")[1][0:2]
+    if len(missing_percent) !=2:
+        missing_percent= missing_percent+ "0"
+    missing = missing_percent + "p_missing_samples"
+    return missing
+
 
 def convert_siclonefit_result(path_to_ssnvs_matrix, out_path, minPresence= 1, minMeasurementsPerCell = 1, path_to_txt_ssnvs_imputed=None, missing = 90):
     '''
@@ -173,7 +184,6 @@ def convert_siclonefit_result(path_to_ssnvs_matrix, out_path, minPresence= 1, mi
     :param path_to_txt_ssnvs_imputed:
     :return:
     '''
-    print("STEP 2: Covert result back to pickle")
 
     filename = path_to_ssnvs_matrix.rsplit("/", 1)[1]
     path = out_path
@@ -188,12 +198,7 @@ def convert_siclonefit_result(path_to_ssnvs_matrix, out_path, minPresence= 1, mi
     # missing = str(round(ssnvs_matrix.isnull().sum().sum() /
     #                     (ssnvs_matrix.shape[0] * ssnvs_matrix.shape[1]), 2)).split(".")[1]+"p_missing_samples"
     # crop
-    missing_percent = str(ssnvs_matrix.isnull().sum().sum() /
-                        (ssnvs_matrix.shape[0] * ssnvs_matrix.shape[1])).split(".")[1][0:2]
-    if len(missing_percent) !=2:
-        missing_percent= missing_percent+ "0"
-    missing = missing_percent + "p_missing_samples"
-
+    missing = missing_percentage(ssnvs_matrix)
     print(f"[formatting.py] siCloneFit output is saved at: {path}/{missing}")
     index = ssnvs_matrix.index
     columns = ssnvs_matrix.columns
