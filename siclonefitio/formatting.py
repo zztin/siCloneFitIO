@@ -132,13 +132,15 @@ def _create_cmd_arg(df, path, filename, siclonefit_path, fp=0.05, fn=0.05, out_d
 
 def sifit_formatting(path_to_ssnvs_matrix,
                      siclonefit_path,
+                     out_path,
                      minPresence=1 ,
                      minMeasurementsPerCell=1,
                      path_to_cnv=None,
                      cnv_column_name = "state"):
-    # print("STEP 1: SIFIT FORMATTING")
+    print("STEP 1: SIFIT FORMATTING")
 
-    path, filename = path_to_ssnvs_matrix.rsplit("/", 1)
+    filename = path_to_ssnvs_matrix.rsplit("/", 1)[1]
+    path = out_path
     ssnvs = pd.read_pickle(path_to_ssnvs_matrix)
     filename = str(filename.split(".")[0])+f"_mp{minPresence}_mm{minMeasurementsPerCell}"
     # select subset of ssnvmatrix with at least n measurement of 0 and 1 in the matrix
@@ -164,7 +166,7 @@ def sifit_formatting(path_to_ssnvs_matrix,
 
 
 
-def convert_siclonefit_result(path_to_ssnvs_matrix, minPresence= 1, minMeasurementsPerCell = 1, path_to_txt_ssnvs_imputed=None, missing = 90):
+def convert_siclonefit_result(path_to_ssnvs_matrix, out_path, minPresence= 1, minMeasurementsPerCell = 1, path_to_txt_ssnvs_imputed=None, missing = 90):
     '''
 
     :param path_to_ssnvs_matrix:
@@ -173,7 +175,8 @@ def convert_siclonefit_result(path_to_ssnvs_matrix, minPresence= 1, minMeasureme
     '''
     print("STEP 2: Covert result back to pickle")
 
-    path, filename = path_to_ssnvs_matrix.rsplit("/", 1)
+    filename = path_to_ssnvs_matrix.rsplit("/", 1)[1]
+    path = out_path
     ssnvs_matrix = pd.read_pickle(path_to_ssnvs_matrix)
     filename = str(filename.split(".")[0])+f"_mp{minPresence}_mm{minMeasurementsPerCell}"
     # select subset of ssnvmatrix with at least n measurement of 0 and 1 in the matrix, update inplace.

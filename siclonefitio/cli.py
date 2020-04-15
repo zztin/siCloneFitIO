@@ -1,9 +1,13 @@
 import sys
+import os
 import argparse
 import pandas as pd
 import siclonefitio.formatting
 import visual.plot_imp_matrix as vp
 
+def make_dir(dir):
+    if not os.path.exists(dir):
+        os.makedirs(dir)
 
 def main():
     # arguments
@@ -23,23 +27,29 @@ def main():
     #    parser.add_argument('-bc', '--barcodeClone', type=str)  # a path
 
     args = parser.parse_args()
-
-    siclonefitio.formatting.sifit_formatting(args.snvmatrix,
+    make_dir(args.outpath)
+    # convert pandas df to txt for siclonefit
+    cmd = siclonefitio.formatting.sifit_formatting(args.snvmatrix,
                                              args.siclonefit_path,
+                                             args.outpath,
                                              minPresence=args.minPresence,
                                              minMeasurementsPerCell=args.minMeasurementsPerCell,
                                              path_to_cnv=args.copyNumberClone,
                                              cnv_column_name="state")
+    print(cmd)
+    # run siclonefit (java)
+    os.system(cmd)
+    # convert siclonefit output to pandas df
     snvmatrix, imputed_snvmatrix = siclonefitio.formatting.convert_siclonefit_result(args.snvmatrix,
+                                                                                     args.outpath,
                                                                                      args.minPresence,
                                                                                      args.minMeasurementsPerCell)
 
-    # plotting
-    vp.make_dir(args.outpath)
+    # plot overlay imputed matrix over sparse matrix
     cnv = pd.read_pickle(args.copyNumberClone)
-    print("snvmatrix shape: ", snvmatrix.shape)
-    print("imputed snvmatrix shape: ", imputed_snvmatrix.shape)
-    print("cnv matrix shape", cnv.shape)
+    print("[cli.py] snvmatrix shape: ", snvmatrix.shape)
+    print("[cli.py] imputed snvmatrix shape: ", imputed_snvmatrix.shape)
+    print("[cli.py] cnv matrix shape", cnv.shape)
     [snvmatrix, imputed_snvmatrix] = vp.check_indexname([snvmatrix, imputed_snvmatrix])
 
     if args.replicate is not None:

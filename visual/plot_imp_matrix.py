@@ -18,11 +18,6 @@ def select_subset(snvmatrix, n=0):
     snvmatrix = snvmatrix.loc[(snvmatrix >= 0).sum(axis=1) >= n]
     return snvmatrix
 
-def make_dir(dir):
-    if not os.path.exists(dir):
-        os.makedirs(dir)
-
-
 def gen_vis_matrix(raw_matrix, imputed_matrix, transparency = 0.45):
     '''
     raw values -> 0,1
