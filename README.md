@@ -31,7 +31,8 @@ Download and decompress the SiCloneFiTComplete.jar in the top folder (same level
 
 #### Running siCloneFitIO 
 ```
-siclonefit --help
+siclonefit -j ../hamimzafar-siclonefit/SiCloneFiTComplete.jar -s ../test_data/test1.pickle \
+-cn ../test_data/cnv.pickle.gz -o ../test_out/ -n test1 -mm 1 -mp 1
 ```
 
 

@@ -31,6 +31,7 @@ class TestSiclonefitio(unittest.TestCase):
         """Set up test fixtures, if any."""
         print("setUP")
 
+
     def tearDown(self):
         """Tear down test fixtures, if any."""
         print("tearDown")
@@ -132,4 +133,18 @@ class TestSiclonefitio(unittest.TestCase):
         out = os.listdir("../unittest_006")
         #print(out)
         self.assertEqual(len(out), 8)
+
+    def test_007_siclonefitIO(self):
+        """
+        Test the whole process. Test cli.py
+        """
+        cmd = "siclonefit -j ../hamimzafar-siclonefit/SiCloneFiTComplete.jar -s ../test_data/test1.pickle -cn ../test_data/cnv.pickle.gz -o ../unittest_007/ -n test1 -mm 1 -mp 1"
+        cmd_list = shlex.split(cmd)
+        try:
+            subprocess.run(cmd_list, check=True)
+        except subprocess.CalledProcessError as cpe:
+            print(cpe)
+            assert False
+        self.assertEqual(os.listdir("../unittest_006"), os.listdir("../test_out"))
+
 
