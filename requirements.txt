@@ -1,0 +1,6 @@
+seaborn
+pandas
+argparse
+matplotlib
+numpy
+
