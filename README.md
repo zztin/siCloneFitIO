@@ -35,15 +35,13 @@ a folder with name "hamimzafar-siclonefit" will appear.
 ```
 cd tests/
 
+* test007 test the complete functionality, takes around 5 mins 
 python -m unittest test_siclonefitio.TestSiclonefitio.test_007_siclonefitIO
 
-
+* If failed, run all tests. This takes around 10 mins. 
 python -m unittest
 
 ```
-* test007 test the complete functionality, takes around 5 mins 
-* test001-006 tests each step of the process. It takes around 5 mins. 
-Please select the fitted test for your 
 
 6. install other dependencies for siclonefit if needed (check https://bitbucket.org/hamimzafar/siclonefit/src/master/)
 
@@ -55,9 +53,10 @@ siclonefit -j ../hamimzafar-siclonefit/SiCloneFiTComplete.jar -s {input_snvmatri
 ```
 
 ```
-# run test data
+# run test data. the output test_out_local/ should be identical to test_out/ on github repo.
+
 siclonefit -j ../hamimzafar-siclonefit/SiCloneFiTComplete.jar -s ../test_data/test1.pickle \
--cn ../test_data/cnv.pickle.gz -o ../test_out/ -n test1 -mm 1 -mp 1
+-cn ../test_data/cnv.pickle.gz -o ../test_out_local/ -n test1 -mm 1 -mp 1
 ```
 
 
