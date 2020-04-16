@@ -34,8 +34,16 @@ a folder with name "hamimzafar-siclonefit" will appear.
 5. Run tests for siclonefitio  
 ```
 cd tests/
+
+python -m unittest test_siclonefitio.TestSiclonefitio.test_007_siclonefitIO
+
+
 python -m unittest
+
 ```
+* test007 test the complete functionality, takes around 5 mins 
+* test001-006 tests each step of the process. It takes around 5 mins. 
+Please select the fitted test for your 
 
 6. install other dependencies for siclonefit if needed (check https://bitbucket.org/hamimzafar/siclonefit/src/master/)
 
