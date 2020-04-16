@@ -23,9 +23,14 @@ class TestSiclonefitio(unittest.TestCase):
     @classmethod
     def tearDownClass(cls):
         print("tearDownClass")
-        shutil.rmtree("../unittest_000_002")
-        shutil.rmtree("../unittest_005")
-        shutil.rmtree("../unittest_006")
+        if os.path.exists("../unittest_000_002/"):
+            shutil.rmtree("../unittest_000_002")
+        if os.path.exists("../unittest_005/"):
+            shutil.rmtree("../unittest_005")
+        if os.path.exists("../unittest_006/"):
+            shutil.rmtree("../unittest_006")
+        if os.path.exists("../unittest_007/"):
+            shutil.rmtree("../unittest_007")
 
     def setUp(self):
         """Set up test fixtures, if any."""
@@ -138,13 +143,17 @@ class TestSiclonefitio(unittest.TestCase):
         """
         Test the whole process. Test cli.py
         """
-        cmd = "siclonefit -j ../hamimzafar-siclonefit/SiCloneFiTComplete.jar -s ../test_data/test1.pickle -cn ../test_data/cnv.pickle.gz -o ../unittest_007/ -n test1 -mm 1 -mp 1"
+        cmd = "python ../siclonefitio/cli.py -j ../hamimzafar-siclonefit/SiCloneFiTComplete.jar -s " \
+              "../test_data/test1.pickle -cn ../test_data/cnv.pickle.gz -o ../unittest_007/ " \
+              "-n test1 -mm 1 -mp 1"
         cmd_list = shlex.split(cmd)
         try:
             subprocess.run(cmd_list, check=True)
         except subprocess.CalledProcessError as cpe:
             print(cpe)
             assert False
-        self.assertEqual(os.listdir("../unittest_006"), os.listdir("../test_out"))
+        self.assertEqual(len(os.listdir("../unittest_007")), 15)
 
 
+if __name__ == '__main__':
+    unittest.main(verbosity=2)
