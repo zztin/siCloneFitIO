@@ -18,7 +18,7 @@ DataFrame and plot imputed matrix overlay with raw data in clustermap.
 git clone https://github.com/BuysDB/IWSS
 pip3 install -e ./IWSS
 ```
-4. The binary [SiCloneFitComplete.jar](https://bitbucket.org/hamimzafar/siclonefit/src/master/SiCloneFiTComplete.jar) is directly downloadable.
+4. SiCloneFit is developed by Hamim Zafar. The binary [SiCloneFitComplete.jar](https://bitbucket.org/hamimzafar/siclonefit/src/master/SiCloneFiTComplete.jar) is directly downloadable.
 Download and decompress the SiCloneFiTComplete.jar in the top folder (same level as the README.md).  
 
 #### Dependencies for SiCloneFit (java script)#
@@ -30,7 +30,14 @@ Download and decompress the SiCloneFiTComplete.jar in the top folder (same level
 
 
 #### Running siCloneFitIO 
+
 ```
+siclonefit -j ../hamimzafar-siclonefit/SiCloneFiTComplete.jar -s {input_snvmatrix_pd_dataframe_pickle} \
+-cn ../test_data/cnv.pickle.gz -o {output_dir} -n test1 -mm {minMeasurement} -mp {minPresence}
+```
+
+```
+# run test data
 siclonefit -j ../hamimzafar-siclonefit/SiCloneFiTComplete.jar -s ../test_data/test1.pickle \
 -cn ../test_data/cnv.pickle.gz -o ../test_out/ -n test1 -mm 1 -mp 1
 ```
@@ -43,6 +50,7 @@ Features
 
 Credits
 -------
+
 
 This package was created with Cookiecutter_ and the `audreyr/cookiecutter-pypackage`_ project template.
 
