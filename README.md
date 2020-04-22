@@ -29,7 +29,7 @@ SiCloneFit is developed by Hamim Zafar.
 The binary [SiCloneFitComplete.jar] is directly downloadable at this repo: 
 https://bitbucket.org/hamimzafar/siclonefit/src/master/SiCloneFiTComplete.jar
 Download and decompress the SiCloneFiTComplete.jar in the siclonefit folder(same level as the README.md), 
-a folder with name "hamimzafar-siclonefit" will appear.
+a folder with name **hamimzafar-siclonefit** will appear. NOTE: if the folder has a different name, change it to **hamimzafar-siclonefit** otherwise it would fail.
 
 5. Run tests for siclonefitio  
 ```
