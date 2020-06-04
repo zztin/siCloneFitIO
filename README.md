@@ -3,10 +3,10 @@
 **SiCloneFitIO** is a python wrapper with cmd line tool to covert data matrix for use of siCloneFit from and to pandas
 DataFrame and plot imputed matrix overlay with raw data in clustermap.
 
-**SiCloneFit** is a Bayesian method for joint inference of tumor clones, clonal genotypes and clonal phylogeny from 
-noisy mutation profile of single cells. Given an imperfect noisy genotype matrix from single cells, **SiCloneFit** 
-employs a Gibbs sampling algorithm to sample from the posterior distribution of the probabilistic graphical model. 
-Each sample contains the cluster indicator for all cells, genotypes of each clone, a clonal phylogeny that represents 
+**SiCloneFit** is a Bayesian method for joint inference of tumor clones, clonal genotypes and clonal phylogeny from
+noisy mutation profile of single cells. Given an imperfect noisy genotype matrix from single cells, **SiCloneFit**
+employs a Gibbs sampling algorithm to sample from the posterior distribution of the probabilistic graphical model.
+Each sample contains the cluster indicator for all cells, genotypes of each clone, a clonal phylogeny that represents
 the genealogical relationships and error rate values.
 
 
@@ -18,34 +18,22 @@ git clone https://github.com/zztin/siCloneFitIO.git
 cd ./siclonefit
 python setup.py install
 ```
-3. Install external package `IWSS` 
-```
-git clone https://github.com/BuysDB/IWSS
-pip3 install -e ./IWSS
-```
-4. Download SiCloneFit binary distribution
 
-SiCloneFit is developed by Hamim Zafar. 
-The binary [SiCloneFitComplete.jar] is directly downloadable at this repo: 
-https://bitbucket.org/hamimzafar/siclonefit/src/master/SiCloneFiTComplete.jar
-Download and decompress the SiCloneFiTComplete.jar in the siclonefit folder(same level as the README.md), 
-a folder with name "hamimzafar-siclonefit" will appear.
-
-5. Run tests for siclonefitio  
+3. Run tests for siclonefitio  
 ```
 cd tests/
 
-* test007 test the complete functionality, takes around 5 mins 
+* test007 test the complete functionality, takes around 5 mins
 python -m unittest test_siclonefitio.TestSiclonefitio.test_007_siclonefitIO
 
-* If failed, run all tests. This takes around 10 mins. 
+* If failed, run all tests. This takes around 10 mins.
 python -m unittest
 
 ```
 
-6. install other dependencies for siclonefit if needed (check https://bitbucket.org/hamimzafar/siclonefit/src/master/)
+4. install other dependencies for siclonefit if needed (check https://bitbucket.org/hamimzafar/siclonefit/src/master/)
 
-#### Running siCloneFitIO 
+#### Running siCloneFitIO
 
 ```
 siclonefit -j ../hamimzafar-siclonefit/SiCloneFiTComplete.jar -s {input_snvmatrix_pd_dataframe_pickle} \
