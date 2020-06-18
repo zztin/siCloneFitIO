@@ -18,7 +18,6 @@ git clone https://github.com/zztin/siCloneFitIO.git
 cd ./siclonefit
 python setup.py install
 ```
-
 3. Run tests for siclonefitio  
 ```
 cd tests/
